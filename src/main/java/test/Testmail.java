@@ -25,7 +25,7 @@ public class Testmail {
 	HomePage objHomePage;
 	
 	@BeforeTest
-	//Настройка перед запуском теста
+	//ГЌГ Г±ГІГ°Г®Г©ГЄГ  ГЇГҐГ°ГҐГ¤ Г§Г ГЇГіГ±ГЄГ®Г¬ ГІГҐГ±ГІГ 
 	public void setup(){
 		 System.setProperty("webdriver.gecko.driver",
 	             "C:\\Program Files (x86)\\geckodriver-v0.19.1-win64\\geckodriver.exe");
@@ -36,52 +36,52 @@ public class Testmail {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get("https://mail.ru/");
 	}
-//Тест авторизации
+//Г’ГҐГ±ГІ Г ГўГІГ®Г°ГЁГ§Г Г¶ГЁГЁ
 	@Test(description="Login test",priority=0)
 	public void logincorrect() throws Exception{
-		//подключение PageObject
+		//ГЇГ®Г¤ГЄГ«ГѕГ·ГҐГ­ГЁГҐ PageObject
 		  objLogin = new Loginpage(driver);
 		    objHomePage = new HomePage(driver);
-	// Логин в почту
+	// Г‹Г®ГЈГЁГ­ Гў ГЇГ®Г·ГІГі
 	objLogin.loginToMail("ivan.teller", "Password123!");
-	//Проверка соответствия логина на странице
+	//ГЏГ°Г®ГўГҐГ°ГЄГ  Г±Г®Г®ГІГўГҐГІГ±ГІГўГЁГї Г«Г®ГЈГЁГ­Г  Г­Г  Г±ГІГ°Г Г­ГЁГ¶ГҐ
 	
 	AssertJUnit.assertTrue(objHomePage.getHomePageDashboardName().contains("ivan.teller@mail.ru"));
-	System.out.println("Пользователь " +objHomePage.getHomePageDashboardName() + " успешно авторизовался");
+	System.out.println("ГЏГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гј " +objHomePage.getHomePageDashboardName() + " ГіГ±ГЇГҐГёГ­Г® Г ГўГІГ®Г°ГЁГ§Г®ГўГ Г«Г±Гї");
 	}	
-	//Тест отправки письма
+	//Г’ГҐГ±ГІ Г®ГІГЇГ°Г ГўГЄГЁ ГЇГЁГ±ГјГ¬Г 
 	@Test(description="Send letter test",priority=1)
 	public void letter_send() throws Exception{
 		objHomePage = new HomePage(driver);
-		// заполнение полей письма
-		objHomePage.createNewLetter("ivan.teller@mail.ru", "Тестовая тема", "Это тестовое письмо");
-		//Проверка статуса письма
-		AssertJUnit.assertTrue(objHomePage.getsuccesssendstatus().contains("Ваше письмо отправлено"));
+		// Г§Г ГЇГ®Г«Г­ГҐГ­ГЁГҐ ГЇГ®Г«ГҐГ© ГЇГЁГ±ГјГ¬Г 
+		objHomePage.createNewLetter("ivan.teller@mail.ru", "Г’ГҐГ±ГІГ®ГўГ Гї ГІГҐГ¬Г ", "ГќГІГ® ГІГҐГ±ГІГ®ГўГ®ГҐ ГЇГЁГ±ГјГ¬Г®");
+		//ГЏГ°Г®ГўГҐГ°ГЄГ  Г±ГІГ ГІГіГ±Г  ГЇГЁГ±ГјГ¬Г 
+		AssertJUnit.assertTrue(objHomePage.getsuccesssendstatus().contains("Г‚Г ГёГҐ ГЇГЁГ±ГјГ¬Г® Г®ГІГЇГ°Г ГўГ«ГҐГ­Г®"));
 		
 	}	
 	@AfterMethod()
-	// Вывод статуса теста + фиксация скриншота в момент ошибки
+	// Г‚Г»ГўГ®Г¤ Г±ГІГ ГІГіГ±Г  ГІГҐГ±ГІГ  + ГґГЁГЄГ±Г Г¶ГЁГї Г±ГЄГ°ГЁГ­ГёГ®ГІГ  Гў Г¬Г®Г¬ГҐГ­ГІ Г®ГёГЁГЎГЄГЁ
 	public void takeScreenShotOnFailure(ITestResult testResult) throws IOException {
 		     switch (testResult.getStatus()) {
 		    case ITestResult.SUCCESS:
-		        System.out.println("======ТЕСТ ПРОЙДЕН=====");
+		        System.out.println("======Г’Г…Г‘Г’ ГЏГђГЋГ‰Г„Г…ГЌ=====");
 		        break;
 		    case ITestResult.FAILURE:
-		        System.out.println("======ОШИБКА=====");
+		        System.out.println("======ГЋГГ€ГЃГЉГЂ=====");
 		        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 				FileUtils.copyFile(scrFile, new File("errorScreenshots\\" + testResult.getName() + "-" 
 						+ Arrays.toString(testResult.getParameters()) +  ".jpg"));
 		        break;
 		    case ITestResult.SKIP:
-		        System.out.println("======ПРОПУЩЕНО=====");
+		        System.out.println("======ГЏГђГЋГЏГ“Г™Г…ГЌГЋ=====");
 		        break;
 		    default:
-		        throw new RuntimeException("Неправильный статус теста");
+		        throw new RuntimeException("ГЌГҐГЇГ°Г ГўГЁГ«ГјГ­Г»Г© Г±ГІГ ГІГіГ± ГІГҐГ±ГІГ ");
 		    }
 		   
 		
 	 }
-//закрытие браузера и процесса
+	// Р—Р°РІРµСЂС€РµРЅРёРµ СЂР°Р±РѕС‚С‹ РґСЂР°Р№РІРµСЂР°
 	@AfterTest()
 	public void aftertest() throws IOException {
 		 driver.quit();
