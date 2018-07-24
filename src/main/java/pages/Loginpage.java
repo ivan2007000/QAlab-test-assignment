@@ -13,23 +13,23 @@ public class Loginpage {
 		public Loginpage(WebDriver driver){
 		this.driver = driver;
 	}
-		//Ввод имени пользователя
+		//Р’РІРѕРґ РёРјРµРЅРё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
 	public void setUserName(String strUserName) throws Exception{
 		driver.findElement(userName).sendKeys(strUserName);
 	}
-	//Ввод пароля
+	//Р’РІРѕРґ РїР°СЂРѕР»СЏ
 	public void setPassword(String strPassword) throws Exception{
 	 driver.findElement(password).sendKeys(strPassword);}
-	//кнопка входа
+	//РєРЅРѕРїРєР° РІС…РѕРґР°
 	public void clickLogin(){driver.findElement(login).click();}
-	// Поиск алертов
+	// РџРѕРёСЃРє Р°Р»РµСЂС‚РѕРІ
 	  public void checkAlert() {
 	        try {
 	            driver.switchTo().alert().accept();
 	           System.out.println("Alert has been found and accepted.");
 	        } catch (NoAlertPresentException e) {}
 	    }
-	  //Метода логина в почту
+	  //РњРµС‚РѕРґР° Р»РѕРіРёРЅР° РІ РїРѕС‡С‚Сѓ
 	public void loginToMail(String strUserName, String strPassword) throws Exception{
 		this.setUserName(strUserName);
 		this.setPassword(strPassword);
