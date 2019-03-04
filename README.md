@@ -1,4 +1,4 @@
-# QAlab-test-assignment
+test-assignment
 Тестовое задание(автотестирование)
 
 Использовался Maven, связка eclipse+selenium+TestNG.
